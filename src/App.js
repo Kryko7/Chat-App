@@ -4,8 +4,16 @@ import Home from "./pages/Home";
 
 import "./style.scss";
 import { BrowserRouter as Router, Switch, Route, BrowserRouter, Routes } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
+import { useContext } from "react";
+
 
 function App() {
+
+  const {currentUser} = useContext(AuthContext);
+
+
+  console.log(currentUser);
   return(
     <BrowserRouter>
       <Routes>
