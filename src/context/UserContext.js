@@ -1,8 +1,5 @@
-import { createContext, useContext } from 'react';
-import { auth } from '../firebase';
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { AuthContext } from "../context/AuthContext";
-import { useReducer } from 'react';
 
 export const UserContext = createContext();
 
@@ -18,9 +15,10 @@ export const UserContextProvider = ({ children }) => {
             case "CHANGE_USER":
                 return {
                     user: action.payload,
-                    chatID : currentUser.uid > action.payload.uid
-                    ? currentUser.uid + action.payload.uid    
-                    : action.payload.uid + currentUser.uid
+                    chatID : 
+                        currentUser.uid > action.payload.uid
+                            ? currentUser.uid + action.payload.uid    
+                            : action.payload.uid + currentUser.uid
                 }
             default:
                 return state;

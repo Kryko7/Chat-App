@@ -2,13 +2,15 @@ import React, { useContext } from "react";
 import Cam from "../img/Cam.png";
 import Add from "../img/Add.png";
 import More from "../img/More.png";
-import Message from "./Message";
 import Messages from "./Messages";
 import Input from "./Input";
 import { UserContext } from "../context/UserContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Chat = () => {
+    const { currentUser } = useContext(AuthContext);
     const { data } = useContext(UserContext)
+    console.log(data);
     return (
         <div className="chat">
             <div className="chatInfo">
