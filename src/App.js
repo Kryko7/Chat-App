@@ -23,7 +23,7 @@ function App() {
   return(
     <BrowserRouter>
       <Routes>
-        <Route path="https://kryko7.github.io/Chat-App/">
+        <Route path="/">
           <Route index element={<ProtectedRoute>
             <Home />
           </ProtectedRoute>} />
