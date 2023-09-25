@@ -1,11 +1,11 @@
 import React from "react";
 import avatar from "../img/avatar.png";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, setPersistence, browserLocalPersistence } from "firebase/auth";
 import  {auth, storage, db}  from "../firebase";
 import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore"; 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 
@@ -46,32 +46,6 @@ const SignUp = () => {
             const docChat = await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
 
-            // uploadTask.on( 
-            //   (error) => {
-            //     // Handle unsuccessful uploads
-            //     console.log("Hehehe error");
-            //     console.log(error);
-            //     setErr(true);
-            //   }, 
-            //   () => {
-            //     // Handle successful uploads on complete
-            //     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-            //     console.log("Hehehe success");
-            //     getDownloadURL(storageRef).then(async(downloadURL) => {
-            //       await updateProfile(res.user, {
-            //         displayName,
-            //         photoURL: downloadURL,
-            //       });
-            //       await setDoc(doc(db, "users", res.user.uid), {
-            //           uid: res.user.uid,
-            //           displayName,
-            //           email,
-            //           photoURL: downloadURL,
-            //       });
-            //     });
-            //   }
-            // );
-            
             
 
         } catch (error) {
@@ -96,7 +70,7 @@ const SignUp = () => {
                     <button>Sign Up</button>
                 </form>
                 {err && <span className="err">Something went wrong!</span>}
-                <p>You do have an account? Login</p>
+                <p>You do have an account? <Link to="/Login"><button type="submit">Sign In</button></Link></p>
             </div>
         </div>
     );
@@ -106,27 +80,3 @@ export default SignUp;
 
 
 
-
-
-
-            // await uploadBytesResumable(storageRef, avatar).then(async() => {
-            //     // getDownloadURL(storageRef).then(async(downloadURL) => {
-            //     const downloadURL = await getDownloadURL(storageRef);
-            //     console.log(downloadURL);
-            //         try{
-            //             await updateProfile(res.user, {
-            //                 displayName,
-            //                 photoURL: downloadURL,
-            //             });
-            //             await setDoc(doc(db, "users", res.user.uid), {
-            //                 uid: res.user.uid,
-            //                 displayName,
-            //                 email,
-            //                 photoURL: downloadURL,
-            //             });
-            //         }
-            //         catch(error){
-            //             setErr(true);
-            //         }
-            //     });
-            // // });

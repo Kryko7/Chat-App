@@ -7,10 +7,13 @@ import { BrowserRouter as Router, Switch, Route, BrowserRouter, Routes, Navigate
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 
+import './styles/global.css'
+
 
 function App() {
 
   const {currentUser} = useContext(AuthContext);
+  //const isAuthenticated = Object.keys(currentUser).length !== 0;
 
   const ProtectedRoute = ({children}) => {
     if(!currentUser) {
@@ -19,7 +22,7 @@ function App() {
 
     return children;
   }
-  console.log(currentUser);
+  console.log(!currentUser)
   return(
     <BrowserRouter>
       <Routes>

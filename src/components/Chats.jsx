@@ -4,25 +4,30 @@ import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
 import { UserContext } from "../context/UserContext";
 
+
 const Chats = () => {
 
     const { currentUser } = useContext(AuthContext);
     const  { dispatch } = useContext(UserContext)
     const [chats, setChats] = useState([]);
     
-
+    
     useEffect(() => {
         const getChats = () => {
             const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
-                setChats(doc.data());
+                if (doc.exists()) {
+                    setChats(doc.data());
+                    console.log("Document data:", doc.data());
+                } else {
+                    console.log("Document does not exist");
+                }
             });
     
             return () => {
                 unsub();
             }
         }
-        
-        currentUser && getChats();
+        currentUser.uid && getChats();
     }, [currentUser.uid]);
 
     const handleSelect = (user) => {
@@ -49,19 +54,4 @@ const Chats = () => {
 }
 
 export default Chats;
-
-
-// return (
-//     <div className="chats">
-//         {chatArr?.map((chat) => (
-//             <div className="userChat" key={chat[0]} onClick={() => handleSelect(chat[1].userInfo)}>
-//                 <img src={chat[1].userInfo.photoURL} alt="" />
-//                 <div className="userChatInfo">
-//                     <span>{chat[1].userInfo.displayName}</span>
-//                     <p>{chat[1].userInfo?.text}</p>
-//                 </div>
-//             </div>
-//         ))}
-//     </div>
-// )
 

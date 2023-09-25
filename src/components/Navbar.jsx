@@ -6,6 +6,13 @@ import {AuthContext}  from "../context/AuthContext";
 const Navbar = () => {
     const { currentUser } = useContext(AuthContext);
 
+    console.log(currentUser);
+    console.log(currentUser.displayName);
+
+    if (!currentUser) {
+        return <div>Loading...</div>
+    }
+
     return (
         <div className="navbar">
             <span className="logo">'Sup</span>

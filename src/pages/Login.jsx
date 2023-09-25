@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { useNavigate, Link } from "react-router-dom";
 import  { auth } from "../firebase";
 
@@ -23,13 +23,13 @@ const Login = () => {
         <div className="formContainer">
             <div className="formWrapper">
                 <span className="logo">'Sup</span>
-                <span className="title">Sign Up</span>
+                <span className="title">Sign In</span>
                 <form onSubmit={handleSubmit}>
                     <input type="email" placeholder="Email" />
                     <input type="password" placeholder="Password" />
                     <button>Sign In</button>
                 </form>
-                <p>You don't have an account? <Link to="/SignUp">Sign Up</Link></p>
+                <p>You don't have an account? <Link to="/SignUp"><button type="submit">Sign In</button></Link></p>
             </div>
         </div>
     );
